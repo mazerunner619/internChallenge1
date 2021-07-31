@@ -18,7 +18,7 @@ export default function DashS() {
   const sendRequest = async(tutor) => {
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
  alert('request sent');
- hist.push('/dashs');
+//  hist.push('/dashs');
   }
           
   
@@ -42,7 +42,7 @@ useEffect( () => {
 fetchAllTutors();
 getLoggedUserData();
 
-}, []);
+});
 
   const allTutors = tutors.map( tutor => 
   <Col lg ={3} md ={3} sm={6} xs={12}>

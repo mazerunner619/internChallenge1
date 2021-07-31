@@ -22,21 +22,19 @@ export default function DashT() {
           setReqS(data.studentRequests);
         }
   }
-
   getLoggedUserData();
-  
-  }, []);
- 
+
+  });
 
    const acceptRequest = async(student) => {
     await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });
-    hist.push('/dasht');
+    // hist.push('/dasht');
     alert('requested accepted');
   }
 
    const deleteRequest = async(student) => {
     await axios.post('/deleteRequest',{ student : student, tutor : loggedUser });
-    hist.push('/dasht');
+    // hist.push('/dasht');
     alert('requested deleted');
   }
 
