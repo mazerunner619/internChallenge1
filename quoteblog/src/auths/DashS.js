@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button, Tabs, Spinner,Tab , ListGroup, Row, Col} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 
 export default function DashS() {
+  const hist = useHistory();
+
   
   const [tutors, setTutors] = useState([]);
 
@@ -15,7 +17,8 @@ export default function DashS() {
 
   const sendRequest = async(tutor) => {
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
-// alert('request sent');
+ alert('request sent');
+ hist.push('/dashs');
   }
           
   
@@ -68,14 +71,12 @@ getLoggedUserData();
                 Already added
                 </ListGroup.Item>
                 :
-                <a href="/dashs" style={{textDecoration : "none"}}>
                 <ListGroup.Item
                 style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
                 onClick = {() => {sendRequest(tutor);}}
                 >
                Request
                </ListGroup.Item>    
-               </a>          
               )
 }
     </ListGroup>

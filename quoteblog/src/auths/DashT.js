@@ -1,11 +1,12 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { Button, Tabs,Tab , Spinner, ListGroup, Row, Col} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 
 export default function DashT() {
 
+  const hist = useHistory();
   const [loggedUser, setLoggedUser] = useState(undefined);
   const [myS, setMyS] = useState([]);
   const [reqS, setReqS] = useState([]);
@@ -29,10 +30,14 @@ export default function DashT() {
 
    const acceptRequest = async(student) => {
     await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });
+    hist.push('/dasht');
+    alert('requested accepted');
   }
 
    const deleteRequest = async(student) => {
     await axios.post('/deleteRequest',{ student : student, tutor : loggedUser });
+    hist.push('/dasht');
+    alert('requested deleted');
   }
 
 const reqArr = reqS.map( s =>
@@ -49,19 +54,15 @@ const reqArr = reqS.map( s =>
   <ListGroup.Item>
     <Row>
       <Col className="text-center">
-      <a href="/dasht" style={{textDecoration : "none"}}>
   <Button variant="success" onClick={() => acceptRequest(s)}>
       Accept
     </Button>
-    </a>
 
     </Col>
     <Col className="text-center">
-    <a href="/dasht" style={{textDecoration : "none"}}>
     <Button variant="danger" onClick={() => deleteRequest(s)}>
       Delete
     </Button>
-    </a>
     </Col>
     </Row>
   </ListGroup.Item>
