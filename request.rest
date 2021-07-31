@@ -1,0 +1,19 @@
+GET  http://localhost:5000/getstudents HTTP/1.1
+
+###
+
+GET  http://localhost:5000/gettutors HTTP/1.1
+
+### 
+GET  http://localhost:5000/clearS HTTP/1.1
+
+### 
+GET  http://localhost:5000/clearT HTTP/1.1
+
+###
+GET http://localhost:5000/exists
+
+Content-Type: application/json
+{
+    "_id":"+917061951535",
+}
