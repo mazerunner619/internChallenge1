@@ -32,7 +32,7 @@ export default function SignupTutor({match}) {
     async function handleS(e){
       e.preventDefault();
       if(info.board && info.class && info.college && info.language && info.mode && info.occupation && info.qualification && info.status && info.subject && info.timing && info.chargeFrom && info.chargeTo){
-      const {data} = await axios.post('http://localhost:5000/tutordetails/'+match.params.id, info);
+      const {data} = await axios.post('/tutordetails/'+match.params.id, info);
       alert(data);
       hist.push('/dasht');
       }

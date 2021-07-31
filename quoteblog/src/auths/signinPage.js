@@ -21,7 +21,7 @@ export default function SignIn() {
         e.preventDefault();
         if(ph){
             setL(1);
-            const {data} = await axios.post('http://localhost:5000/otp/getotp', {phone : ph});
+            const {data} = await axios.post('/otp/getotp', {phone : ph});
              if(data === 'pending'){
                 hist.push('/verify/'+data+'/'+ph);
             }

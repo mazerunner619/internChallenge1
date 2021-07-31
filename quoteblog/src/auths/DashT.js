@@ -13,7 +13,7 @@ export default function DashT() {
 
   useEffect( () => {
     const getLoggedUserData = async() => {
-        const {data} = await axios.get('http://localhost:5000/otp/current');
+        const {data} = await axios.get('/otp/current');
         if(data){
           setLoggedUser(data);
           setLogged(1);
@@ -28,11 +28,11 @@ export default function DashT() {
  
 
    const acceptRequest = async(student) => {
-    await axios.post('http://localhost:5000/acceptRequest',{ student : student, tutor : loggedUser });
+    await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });
   }
 
    const deleteRequest = async(student) => {
-    await axios.post('http://localhost:5000/deleteRequest',{ student : student, tutor : loggedUser });
+    await axios.post('/deleteRequest',{ student : student, tutor : loggedUser });
   }
 
 const reqArr = reqS.map( s =>

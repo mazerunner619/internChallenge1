@@ -21,7 +21,7 @@ export default function SignupStudent({match}) {
   async function handleS(e){
     e.preventDefault();
     if(info.class && info.board && info.stream){
-      const {data} = await axios.post('http://localhost:5000/studentdetails/'+match.params.id, info);
+      const {data} = await axios.post('/studentdetails/'+match.params.id, info);
       alert(data);
       hist.push('/dashs');
     }

@@ -13,7 +13,7 @@ export default function Navi() {
 
   async function logout(e){
     e.preventDefault();
-    await axios.get('http://localhost:5000/logout');
+    await axios.get('/logout');
     getLogged();
     getLoggedUser();
     hist.push('/');

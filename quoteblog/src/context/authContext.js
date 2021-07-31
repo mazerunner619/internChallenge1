@@ -11,13 +11,13 @@ function AuthContextProvider(props) {
     const [loggedUser, setLoggedUser] = useState({});
     
     async function getLogged(){
-            const loggedInRes = await axios.get('http://localhost:5000/otp/isLogged');
+            const loggedInRes = await axios.get('/otp/isLogged');
             console.log('getLogged resposne => '+loggedInRes.data);
             setLogged(loggedInRes.data);
     }
 
     async function getLoggedUser(){
-            const loggedUserRes = await axios.get('http://localhost:5000/otp/current');
+            const loggedUserRes = await axios.get('/otp/current');
             setLoggedUser(loggedUserRes.data);
             console.log('authContext user : ');
             console.log(loggedUserRes.data);

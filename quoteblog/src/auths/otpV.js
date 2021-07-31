@@ -23,7 +23,7 @@ export default function VerifyOTP({match}) {
     if(otp){
 
       setVer(true);
-      const {data} = await axios.post('http://localhost:5000/otp/verifyotp', {token : otp, phone : match.params.ph});
+      const {data} = await axios.post('/otp/verifyotp', {token : otp, phone : match.params.ph});
       if(data === 'failed'){
         setVer(false);
         alert('wrong OTP');
@@ -33,7 +33,7 @@ export default function VerifyOTP({match}) {
       else{
         getLogged();
         getLoggedUser();
-        const {data} = await axios.post('http://localhost:5000/exists', {_id : match.params.ph} ); 
+        const {data} = await axios.post('/exists', {_id : match.params.ph} ); 
         setVer(false);
         if(data === 'new'){
           hist.push('/signup/'+match.params.ph);

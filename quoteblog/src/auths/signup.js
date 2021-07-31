@@ -30,7 +30,7 @@ export default function Signup({match}) {
     async function signupStudent(e){
       e.preventDefault();
       if(user.fName && user.lName && user.ffName && user.flName && user.address && user.city && user.pincode && user.gender && user.email && user.dob){
-        const {data} = await axios.post( 'http://localhost:5000/student' , user);
+        const {data} = await axios.post( '/student' , user);
         alert('your id : '+data);
         hist.push('/signupS/'+data);
       }
@@ -43,7 +43,7 @@ export default function Signup({match}) {
       e.preventDefault();
       if(user.fName && user.lName && user.ffName && user.flName && user.address && user.city && user.pincode && user.gender && user.email && user.dob)
       {
-        const {data} = await axios.post( 'http://localhost:5000/tutor' ,user);
+        const {data} = await axios.post( '/tutor' ,user);
         alert('your id : '+data);
         hist.push('/signupT/'+data);
       }

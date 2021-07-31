@@ -14,7 +14,7 @@ export default function DashS() {
   const [logged, setLogged] = useState(0);
 
   const sendRequest = async(tutor) => {
- await axios.post('http://localhost:5000/addStudentRequest',{ student : loggedUser, tutor : tutor });
+ await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
 // alert('request sent');
   }
           
@@ -22,12 +22,12 @@ export default function DashS() {
 useEffect( () => {
 
   const fetchAllTutors = async() => {
-    const {data} = await axios.get('http://localhost:5000/gettutors');
+    const {data} = await axios.get('/gettutors');
     setTutors(data);
   }
 
   const getLoggedUserData = async() => {
-      const {data} = await axios.get('http://localhost:5000/otp/current');
+      const {data} = await axios.get('/otp/current');
       if(data){
         setLoggedUser(data);
         setLogged(1);
