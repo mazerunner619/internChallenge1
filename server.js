@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
+app.get('*',(req, res) => {
+    res.sendFile(path.resolve(__dirname, 'quoteblog', 'build', 'index.html'));
+});
+
 app.use('/', Route);
 app.use('/otp', OTProute);
 

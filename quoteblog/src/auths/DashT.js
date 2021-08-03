@@ -1,12 +1,11 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { Button, Tabs,Tab ,Accordion, Spinner, Form, Card, ListGroup, Row, Col} from 'react-bootstrap'
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 export default function DashT() {
 
-  const hist = useHistory();
   const [confirm, setConfirm] = useState(false);
   const [l, setL] = useState(0);
 
@@ -59,10 +58,9 @@ export default function DashT() {
     schedule.subject = mySubject;
     schedule.tutorName = loggedUser.name;
     const {data} = await axios.post('/scheduleClass',{tutor : loggedUser , newClass : schedule});
-    // hist.push('/dasht');
     if(data === '0')alert("serverside error! please try again");
-    setL(0);
-    //window.location.reload();
+    // setL(0);
+    window.location.reload();
   }
 
   
@@ -77,16 +75,14 @@ export default function DashT() {
 
    const acceptRequest = async(student) => {
     await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });
-    // hist.push('/dasht');
     alert('requested accepted');
-    //window.location.reload();
+    window.location.reload();
   }
 
    const deleteRequest = async(student) => {
     await axios.post('/deleteRequest',{ student : student, tutor : loggedUser });
-    // hist.push('/dasht');
     alert('requested deleted');
-    //window.location.reload();
+    window.location.reload();
   }
 
 const reqArr = reqS.map( s =>

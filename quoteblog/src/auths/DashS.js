@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button, Tabs, Spinner,Tab , ListGroup, Row, Col} from 'react-bootstrap'
-import {Link, useHistory} from 'react-router-dom'
-
+import {Link} from 'react-router-dom'
 
 export default function DashS() {
-  const hist = useHistory();
 
   
   
@@ -22,8 +20,7 @@ export default function DashS() {
   const sendRequest = async(tutor) => {
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
  alert('request sent');
- //window.location.reload();
-//  hist.push('/dashs');
+ window.location.reload();
   }
 
   async function Enroll(){
