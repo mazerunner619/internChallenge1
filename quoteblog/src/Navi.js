@@ -59,10 +59,10 @@ textTransform : "uppercase"
         <Nav.Link>dashboard
         </Nav.Link>
         </LinkContainer>
-           <LinkContainer to = "/">
+
+      
            <Nav.Link onClick = {logout}>Logout
            </Nav.Link>
-       </LinkContainer>
        </>
         
     }

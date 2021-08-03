@@ -13,6 +13,7 @@ const studentSchema = {
   class : String,
   board : String,
   stream : String,
+  enrolledClasses : [],
   myTutors : [],
   reqTutors : [],
 }

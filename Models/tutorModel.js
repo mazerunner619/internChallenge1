@@ -13,7 +13,8 @@ const tutorSchema = {
   status : String,
   college : String,
   mode : String,
-  class : String,
+  // class : String,
+  class : [],
   language : String,
   subject : String,
   board : String,
@@ -21,6 +22,7 @@ const tutorSchema = {
   occupation : String,
   chargeFrom : String,
   chargeTo : String,
+  scheduledClasses : [],
   studentRequests : [],
   myStudents : [],
 }

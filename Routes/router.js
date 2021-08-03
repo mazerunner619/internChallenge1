@@ -77,6 +77,69 @@ router.post('/addStudentRequest', AuthMW, (req, res) => {
 });
 
 
+// router.post('/acceptRequest',AuthMW,  (req, res) => {
+
+//     const { student, tutor} = req.body;
+ 
+//      //add to student's myTutors
+//    Student.findOneAndUpdate(
+//          { _id: student._id}, 
+//          { $push: { myTutors: tutor } },
+//         function (error, success) {
+//               if (error) {
+//                   console.log(error);
+//               } else {
+//                   console.log('student tutor added');
+//               }
+//           }
+//           );
+ 
+//           //add to tutor's student list
+//            Tutor.findOneAndUpdate(
+//              { _id : tutor._id}, 
+//              { $push: { myStudents: student} },
+//             function (error, success) {
+//                   if (error) {
+//                       console.log(error);
+//                   } else {
+//                     console.log('request accepted by tutor');
+//                   }
+//               }
+//               );
+
+
+//         //remove from tutors received req list
+//          Tutor.findByIdAndUpdate(
+//             tutor._id, 
+//             { $pull: { studentRequests : { _id: student._id } } }, { safe: true, upsert: true },
+//             function(err) {
+//                 if (err) {
+//                     console.log(err);
+//                 }
+//                  else{
+//                     console.log('done');
+//                  }
+//             }); 
+
+//     //remove from student's requested tutors
+//      Student.findByIdAndUpdate(
+//                 student._id, 
+//                 { $pull: { reqTutors : { _id: tutor._id } } }, { safe: true, upsert: true },
+//                 function(err) {
+//                     if (err) {
+//                         console.log(err);
+//                      }
+//                      else{
+//                         console.log('done');
+//                      }
+//                 }); 
+        
+//             res.send('done');
+//  });
+
+
+
+
 router.post('/acceptRequest',AuthMW,  (req, res) => {
 
     const { student, tutor} = req.body;
@@ -84,7 +147,7 @@ router.post('/acceptRequest',AuthMW,  (req, res) => {
      //add to student's myTutors
    Student.findOneAndUpdate(
          { _id: student._id}, 
-         { $push: { myTutors: tutor } },
+         { $push: { myTutors: tutor._id } },
         function (error, success) {
               if (error) {
                   console.log(error);
@@ -135,6 +198,31 @@ router.post('/acceptRequest',AuthMW,  (req, res) => {
                 }); 
         
             res.send('done');
+ });
+
+
+
+
+ router.post('/scheduleClass', AuthMW, async(req, res) => {
+
+    const {tutor, newClass} = req.body;
+    console.log(newClass);
+
+    Tutor.findByIdAndUpdate(
+        tutor._id,
+        { $push: { scheduledClasses : newClass } },
+       function (error, success) {
+             if (error) {
+                 console.log(error);
+                 return res.send('0');
+             } else {
+                 console.log('scheduled a new class');
+             }
+         }
+         );
+
+         return res.send('1');
+
  });
 
 

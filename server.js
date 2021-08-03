@@ -10,7 +10,9 @@ const cookieParser = require('cookie-parser');
 require('dotenv/config');
 
 app.use(bodyParser.json());
+
 app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
@@ -23,8 +25,9 @@ app.get('/logout' , (req, res) => {
     httpOnly : true,
     expires : new Date(0)
     }).send();
+    console.log('logged out');
 })
-  
+
 mongoose.connect(process.env.CONN_STRING, 
     {
         useNewUrlParser : true,
