@@ -12,10 +12,8 @@ const cookieParser = require('cookie-parser');
 require('dotenv/config');
 
 app.use(bodyParser.json());
-app.use(cors({
-    origin : ["http://localhost:3000"],
-    credentials : true
-}));
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
@@ -49,6 +47,10 @@ mongoose.connect(process.env.CONN_STRING,
 
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("quoteblog/build"));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'quoteblog', 'build', 'index.html'));
+    });
 }
 
 app.listen(PORT, () => {
