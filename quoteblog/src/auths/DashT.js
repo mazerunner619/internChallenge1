@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { Button, Tabs,Tab ,Accordion, Spinner, Form, Card, ListGroup, Row, Col} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
 
 
 export default function DashT() {
@@ -62,22 +61,14 @@ export default function DashT() {
     setL(0);
     setSchedule({
       tutorName : "",
-      class : "",  // from logged tutor data choose the class
+      class : "",  
       timing : "", 
-      subject : "", // from logged tutor data choose the class
-    }
-    //window.location.reload();
+      subject : "",
+    });
+
   }
 
   
-  const cancelClass = async(student) => {
-    // schedule.subject = mySubject;
-    // const {data} = await axios.post('/scheduleClass',{tutor : loggedUser , newClass : schedule});
-    // // hist.push('/dasht');
-    // if(data === '0')alert("serverside error! please try again");
-    ////window.location.reload();
-  }
-
 
    const acceptRequest = async(student) => {
     await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });

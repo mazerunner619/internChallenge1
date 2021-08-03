@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button, Tabs, Spinner,Tab , ListGroup, Row, Col} from 'react-bootstrap'
+import { Tabs, Spinner,Tab , ListGroup, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 export default function DashS() {
 
   
-  const [l, setL] = useState(0);
+  
   const [tutors, setTutors] = useState([]);
 
   const [loggedUser, setLoggedUser] = useState(undefined);
@@ -18,11 +18,10 @@ export default function DashS() {
   const [logged, setLogged] = useState(0);
 
   const sendRequest = async(tutor) => {
-    setL(1);
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
  alert('request sent');
-setL(0);
   }
+        
   
 useEffect( () => {
 
@@ -50,8 +49,6 @@ fetchAllTutors();
 });
 
 
-
-const myTutorsPosts = [];
 
   const filteredTutors = tutors.map( tutor =>{
     return(  
@@ -84,33 +81,12 @@ const myTutorsPosts = [];
                 Already added
                 </ListGroup.Item>
                 :
-
-                (
-                  l?
-                  <>
-              <ListGroup.Item variant="secondary">
-              <Spinner
-              as="span"
-              animation="border"
-              size="lg"
-              role="status"
-              aria-hidden="true"
-            />
-             </ListGroup.Item>
-
-             </>
-              :
-              <>
-              <ListGroup.Item
-              style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
-              onClick = {() => {sendRequest(tutor);}}
-              >
-             Send Request
-             </ListGroup.Item>
-              </>
-                
-                )  
-
+                <ListGroup.Item
+                style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
+                type="submit" onClick = {() => {sendRequest(tutor);}}
+                >
+               Request
+               </ListGroup.Item>    
               )
 }
     </ListGroup>
