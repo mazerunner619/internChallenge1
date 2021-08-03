@@ -45,7 +45,7 @@ export default function DashT() {
   }
   getLoggedUserData();
 
-  });
+  }, []);
 
   
   function changeTutorForm(e){
@@ -60,22 +60,19 @@ export default function DashT() {
     const {data} = await axios.post('/scheduleClass',{tutor : loggedUser , newClass : schedule});
     if(data === '0')alert("serverside error! please try again");
     alert('scheduled successfully');
-    setL(0);
-
+    window.location.reload();
   }
-
-
 
    const acceptRequest = async(student) => {
     await axios.post('/acceptRequest',{ student : student, tutor : loggedUser });
     alert('requested accepted');
-    //window.location.reload();
+    window.location.reload();
   }
 
    const deleteRequest = async(student) => {
     await axios.post('/deleteRequest',{ student : student, tutor : loggedUser });
     alert('requested deleted');
-    //window.location.reload();
+    window.location.reload();
   }
 
 const reqArr = reqS.map( s =>
