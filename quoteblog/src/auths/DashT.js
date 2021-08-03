@@ -59,7 +59,13 @@ export default function DashT() {
     schedule.tutorName = loggedUser.name;
     const {data} = await axios.post('/scheduleClass',{tutor : loggedUser , newClass : schedule});
     if(data === '0')alert("serverside error! please try again");
-    // setL(0);
+    setL(0);
+    setSchedule({
+      tutorName : "",
+      class : "",  // from logged tutor data choose the class
+      timing : "", 
+      subject : "", // from logged tutor data choose the class
+    }
     //window.location.reload();
   }
 

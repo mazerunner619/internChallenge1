@@ -15,12 +15,16 @@ export default function DashS() {
   const [userClass, setUserClass] = useState(undefined);
   const [userBoard,setUserBoard ] = useState(undefined);
 
+  const [l, setL] = useState(0);
+
   const [logged, setLogged] = useState(0);
 
   const sendRequest = async(tutor) => {
+    setL(1);
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
  alert('request sent');
- window.location.reload();
+ setL(0);
+//  window.location.reload();
   }
 
   async function Enroll(){
@@ -78,6 +82,7 @@ const myTutorsPosts = [];
           <ListGroup.Item>Timing - {tutor.timing}</ListGroup.Item>
           <ListGroup.Item>Fee - Rs{tutor.chargeFrom} - {tutor.chargeTo}</ListGroup.Item>
           {
+
           reqT.find(o => o._id === tutor._id)?
           <ListGroup.Item
           style={{background : "lightgrey", color : "red", fontWeight : "bolder", textAlign :"center"}}
@@ -93,12 +98,28 @@ const myTutorsPosts = [];
                 Already added
                 </ListGroup.Item>
                 :
-                <ListGroup.Item
-                style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
-                type="submit" onClick = {() => {sendRequest(tutor);}}
-                >
-               Request
-               </ListGroup.Item>    
+                (
+                  l?
+                  <>
+              <ListGroup.Item variant="secondary">
+              <Spinner
+              as="span"
+              animation="border"
+              size="lg"
+              role="status"
+              aria-hidden="true"
+            />
+             </ListGroup.Item>
+              :
+              <ListGroup.Item
+              style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
+              onClick = {() => {sendRequest(tutor);}}
+              >
+             Send Request
+             </ListGroup.Item>
+              </>
+                )
+
               )
 }
     </ListGroup>
@@ -145,31 +166,6 @@ const requestedTutors = reqT.map( tutor =>
   </Col> 
   );
 
-  
-
-  // const myTutors = tutors.map( tutor => {
-  //   return (
-  //     <>
-  //     {
-  //   (myT.indexOf(tutor._id) !== -1) &&
-  //   <Col lg ={3} md ={3} sm={6} xs={12}>
-  //   <ListGroup style={{margin : "4%"}}>
-  //   <ListGroup.Item  
-  // style={{background : "#E9922D", color : "black", fontWeight : "bolder", textAlign :"center"}}
-  //   >{tutor.name}</ListGroup.Item>
-  //   <ListGroup.Item>Highest Qualification - {tutor.qualification}</ListGroup.Item>
-  //   <ListGroup.Item>College - {tutor.college}</ListGroup.Item>
-  //   <ListGroup.Item>Mode of Teaching - {tutor.mode}</ListGroup.Item>
-  //   <ListGroup.Item>Timing - {tutor.timing}</ListGroup.Item>
-  //   <ListGroup.Item>Fee - Rs{tutor.chargeFrom} - {tutor.chargeTo}</ListGroup.Item>
-  // </ListGroup>
-  // </Col> 
-  //     }
-  //     </>
-  //   )
-  // });
-
-
 
   var feedsArray = [];
 
@@ -180,7 +176,6 @@ const requestedTutors = reqT.map( tutor =>
     }
     return sc;
   });
-
 
 
    
