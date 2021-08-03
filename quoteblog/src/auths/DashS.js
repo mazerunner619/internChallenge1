@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 export default function DashS() {
 
   
-  
+  const [l, setL] = useState(0);
   const [tutors, setTutors] = useState([]);
 
   const [loggedUser, setLoggedUser] = useState(undefined);
@@ -15,32 +15,19 @@ export default function DashS() {
   const [userClass, setUserClass] = useState(undefined);
   const [userBoard,setUserBoard ] = useState(undefined);
 
-  const [l, setL] = useState(0);
-
   const [logged, setLogged] = useState(0);
 
   const sendRequest = async(tutor) => {
     setL(1);
  await axios.post('/addStudentRequest',{ student : loggedUser, tutor : tutor });
  alert('request sent');
- setL(0);
-//  window.location.reload();
+setL(0);
   }
-
-  async function Enroll(){
-    alert("enrolled")
-  }
-        
   
 useEffect( () => {
 
   const fetchAllTutors = async() => {
     const {data} = await axios.get('/gettutors');
-
-
-    const tutorsNotAdded = data.filter( d => {
-      return (d.class.indexOf(userClass) !== -1) && (d.board.indexOf(userBoard) !== -1);
-    });
     setTutors(data); // set tutors => all tutors form the database
     console.log('fetched tutors');
   }
@@ -82,7 +69,6 @@ const myTutorsPosts = [];
           <ListGroup.Item>Timing - {tutor.timing}</ListGroup.Item>
           <ListGroup.Item>Fee - Rs{tutor.chargeFrom} - {tutor.chargeTo}</ListGroup.Item>
           {
-
           reqT.find(o => o._id === tutor._id)?
           <ListGroup.Item
           style={{background : "lightgrey", color : "red", fontWeight : "bolder", textAlign :"center"}}
@@ -98,6 +84,7 @@ const myTutorsPosts = [];
                 Already added
                 </ListGroup.Item>
                 :
+
                 (
                   l?
                   <>
@@ -110,7 +97,10 @@ const myTutorsPosts = [];
               aria-hidden="true"
             />
              </ListGroup.Item>
+
+             </>
               :
+              <>
               <ListGroup.Item
               style={{ background : "#E9922D", color : "white", fontWeight : "bolder", textAlign :"center"}}
               onClick = {() => {sendRequest(tutor);}}
@@ -118,7 +108,8 @@ const myTutorsPosts = [];
              Send Request
              </ListGroup.Item>
               </>
-                )
+                
+                )  
 
               )
 }
@@ -166,6 +157,31 @@ const requestedTutors = reqT.map( tutor =>
   </Col> 
   );
 
+  
+
+  // const myTutors = tutors.map( tutor => {
+  //   return (
+  //     <>
+  //     {
+  //   (myT.indexOf(tutor._id) !== -1) &&
+  //   <Col lg ={3} md ={3} sm={6} xs={12}>
+  //   <ListGroup style={{margin : "4%"}}>
+  //   <ListGroup.Item  
+  // style={{background : "#E9922D", color : "black", fontWeight : "bolder", textAlign :"center"}}
+  //   >{tutor.name}</ListGroup.Item>
+  //   <ListGroup.Item>Highest Qualification - {tutor.qualification}</ListGroup.Item>
+  //   <ListGroup.Item>College - {tutor.college}</ListGroup.Item>
+  //   <ListGroup.Item>Mode of Teaching - {tutor.mode}</ListGroup.Item>
+  //   <ListGroup.Item>Timing - {tutor.timing}</ListGroup.Item>
+  //   <ListGroup.Item>Fee - Rs{tutor.chargeFrom} - {tutor.chargeTo}</ListGroup.Item>
+  // </ListGroup>
+  // </Col> 
+  //     }
+  //     </>
+  //   )
+  // });
+
+
 
   var feedsArray = [];
 
@@ -176,6 +192,7 @@ const requestedTutors = reqT.map( tutor =>
     }
     return sc;
   });
+
 
 
    
