@@ -29,7 +29,7 @@ function Router() {
   <Route path="/dashs" component = {DashS} />
   <Route path="/signupS/:id" component ={SignupS} />
   <Route path="/signupT/:id" component = {SignupT}/>
-  <Route path = "/verify/:id/:ph" component={OtpVerify} />
+  <Route path = "/verify/:ph" component={OtpVerify} />
   <Route path="/signup/:ph" component= {Signup} />
   
       </BrowserRouter>

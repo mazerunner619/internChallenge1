@@ -23,7 +23,7 @@ export default function SignIn() {
             setL(1);
             const {data} = await axios.post('/otp/getotp', {phone : ph});
              if(data === 'pending'){
-                hist.push('/verify/'+data+'/'+ph);
+                hist.push('/verify/'+ph);
             }
             else{
                 alert('error');
