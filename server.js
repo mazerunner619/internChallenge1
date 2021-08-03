@@ -5,6 +5,8 @@ const OTProute = require('./Routes/otplogin');
 const PORT = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv/config');
@@ -18,7 +20,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 app.get('*',(req, res) => {
-    res.sendFile(path.resolve(__dirname, 'quoteblog', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'quoteblog', 'build', 'index.html'));
 });
 
 app.use('/', Route);
