@@ -12,16 +12,10 @@ const cookieParser = require('cookie-parser');
 require('dotenv/config');
 
 app.use(bodyParser.json());
-
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
-
-app.get('*',(req, res) => {
-    res.sendFile(path.join(__dirname, 'quoteblog', 'build', 'index.html'));
-});
 
 app.use('/', Route);
 app.use('/otp', OTProute);
