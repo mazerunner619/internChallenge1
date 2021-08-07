@@ -30,7 +30,7 @@ textTransform : "uppercase"
 }}>
   
   <Navbar.Brand href="/">
- Vidyayan{' '} 
+ Vidyayan{' '}<p className="text-muted">let's gain together</p> 
   </Navbar.Brand>
 
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
