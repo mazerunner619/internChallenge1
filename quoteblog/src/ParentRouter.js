@@ -5,12 +5,12 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Signup from './auths/signup'
 import { useContext } from 'react';
 import AuthContext from './context/authContext';
-import SigninPage from './auths/signinPage';
-import OtpVerify from './auths/otpV';
-import DashS from './auths/DashS';
-import DashT from './auths/DashT';
-import SignupS from './auths/signupS';
-import SignupT from './auths/signupT';
+import Login from './auths/login';
+import DashS from './studentDashboard/DashS';
+import DashT from './tutorDashboard/DashT';
+import ClassroomT from './tutorDashboard/ClassroomT'
+import ClassroomS from './studentDashboard/ClassroomS'
+import Assignment from './tutorDashboard/Assignment'
 
 
 function Router() {
@@ -23,14 +23,15 @@ function Router() {
       <Navi />
       
   <Route path = "/" exact>
-        <SigninPage />
+        <Login />
   </Route>
   <Route path="/dasht" component = {DashT} />
   <Route path="/dashs" component = {DashS} />
-  <Route path="/signupS/:id" component ={SignupS} />
-  <Route path="/signupT/:id" component = {SignupT}/>
-  <Route path = "/verify/:ph" component={OtpVerify} />
-  <Route path="/signup/:ph" component= {Signup} />
+  <Route path="/signup" component= {Signup} />
+  <Route path="/classroomt/:id" component= {ClassroomT} />
+  <Route path="/classrooms/:id" component= {ClassroomS} />
+  <Route path="/assignment/:id" component= {Assignment} />
+
   
       </BrowserRouter>
   );

@@ -1,0 +1,69 @@
+Create table cust
+(Cust_id Varchar(3),
+Lname Varchar(15),
+Fname Varchar(15),
+Area Varchar(2),
+Phone_no number(8));
+
+Create table movie
+(Mv_no number(2),
+Title Varchar(25),
+Type Varchar(10),
+Star Varchar(25),
+Price number(8,2));
+
+Create table invoice
+(Inv_no Varchar(3),
+Mv_no number(2),
+Cust_id Varchar(3),
+Issue_date date,
+Return_date date);
+
+insert into cust (Cust_id,Lname,Fname,Area,Phone_no) values
+('A','Kumar','Alam','Howrah',57689389);
+
+insert into cust (Cust_id,Lname,Fname,Area,Phone_no) values
+('B','Chandan','Rohan','Howrah',54389498);
+
+insert into movie (Mv_no,Title,Type,Star,Price) values
+(1,'Don2','Action','SRK',220);
+
+insert into movie (Mv_no,Title,Type,Star,Price) values
+(2,'Tubelight','Comedy','SK',180);
+
+insert into invoice (Inv_no,Mv_no,Cust_id,Issue_date,Return_date) values
+(1,1,'A','23/4/19','24/4/19');
+
+insert into invoice (Inv_no,Mv_no,Cust_id,Issue_date,Return_date) values
+(2,2,'B','23/4/19','24/4/19');
+
+select Fname,Lname 
+from cust;
+
+select Type
+from movie;
+
+select *
+from cust
+where Phone_no>5550000;
+
+select Title
+from movie
+where Type='Action' OR Type='Comedy';
+
+select Title
+from movie
+where Price>150 AND Price<=200;
+
+--------OUTPUT--------------
+Alam|Kumar
+Rohan|Chandan
+Action
+Comedy
+A|Kumar|Alam|Howrah|57689389
+B|Chandan|Rohan|Howrah|54389498
+Don2
+Tubelight
+Tubelight
+
+[Program exited with exit code 0]

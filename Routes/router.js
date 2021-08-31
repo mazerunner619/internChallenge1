@@ -4,6 +4,7 @@ const router = express.Router();
 const Student = require('../Models/studentModel');
 const Tutor = require('../Models/tutorModel');
 const AuthMW = require('../auth-middleware');
+const { db } = require('../Models/Classroom');
 
 router.post('/exists', async (req, res) => {
     
@@ -200,28 +201,38 @@ router.post('/acceptRequest',AuthMW,  (req, res) => {
             res.send('done');
  });
 
+//create a new classroom
+ router.post('/:tutorid/classroom/new', async(req, res, next) => {
+     try{
+console.log('in create classroom route');
+        const tutorid = req.params.tutorid;
+        const {className, subject} = req.body;
 
+        const tutor = await db.Tutor.findById(tutorid);
+        if(!tutor){
+            return next({
+                message : 'could not find tutor',
+                status : false
+            });
+        }
 
+        const newClassroom = await db.Classroom.create({
+            className, subject, creator : tutorid
+        })
 
- router.post('/scheduleClass', AuthMW, async(req, res) => {
+        console.log(newClassroom);
+        return next({
+            message : 'classroom created successfully',
+            status : true
+        });      
 
-    const {tutor, newClass} = req.body;
-    console.log(newClass);
-
-    Tutor.findByIdAndUpdate(
-        tutor._id,
-        { $push: { scheduledClasses : newClass } },
-       function (error, success) {
-             if (error) {
-                 console.log(error);
-                 return res.send('0');
-             } else {
-                 console.log('scheduled a new class');
-             }
-         }
-         );
-
-         return res.send('1');
+     }catch(err){
+         console.log(err);
+        return next({
+            message : err.message,
+            status : false
+        });
+     }
 
  });
 

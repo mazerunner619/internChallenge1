@@ -11,25 +11,24 @@ function AuthContextProvider(props) {
     const [loggedUser, setLoggedUser] = useState({});
     
     async function getLogged(){
-            const loggedInRes = await axios.get('/otp/isLogged');
-            console.log('getLogged resposne => '+loggedInRes.data);
-            setLogged(loggedInRes.data);
+            const {data} = await axios.get('/auth/current');
+            console.log('getLogged resposne => ',data);
+            if(data){
+                setLogged(true);
+                setLoggedUser(data)
+                return data;
+            }
+            else {
+                setLogged(false);
+                setLoggedUser(undefined);
+            }
     }
-
-    async function getLoggedUser(){
-            const loggedUserRes = await axios.get('/otp/current');
-            setLoggedUser(loggedUserRes.data);
-            console.log('authContext user : ');
-            console.log(loggedUserRes.data);
-    }
- 
     useEffect( () => {
         getLogged();
-        getLoggedUser();
     }, []);
 
     return (
-    <AuthContext.Provider value ={{logged, getLogged, loggedUser , getLoggedUser}}>
+    <AuthContext.Provider value ={{logged, getLogged, loggedUser}}>
         {props.children}
     </AuthContext.Provider>
     )

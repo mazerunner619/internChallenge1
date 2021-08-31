@@ -1,25 +1,29 @@
 const express = require('express');
 const app = express();
-const Route = require('./Routes/router');
-const OTProute = require('./Routes/otplogin');
+const db = require('./Models');
+const authRoute = require('./Routes/authRoute');
 const PORT = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-
+require('dotenv/config');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-require('dotenv/config');
 
-app.use(bodyParser.json());
 app.use(cors());
+
+app.use(function(err , req , res , next){
+    return res.status(err.status || 500).json({
+        error : {
+            message : err.message || "Opps! Something went wrong."
+        }
+    });
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
-
-app.use('/', Route);
-app.use('/otp', OTProute);
+app.use('/auth', authRoute);
 
 app.get('/logout' , (req, res) => {
     res.cookie("token", "",{
@@ -29,11 +33,19 @@ app.get('/logout' , (req, res) => {
     console.log('logged out');
 })
 
+app.use(function(err , req , res , next){
+    return res.send({
+        message : err.message || "Opps! Something went wrong.",
+        status : err.status
+    });
+});
+
 mongoose.connect(process.env.CONN_STRING, 
     {
         useNewUrlParser : true,
         useUnifiedTopology : true
     }, 
+    
     function(error){
         if(error){ 
             console.log(error);

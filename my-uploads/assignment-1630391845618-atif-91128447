@@ -1,0 +1,4 @@
+We notice from the graph that all three of the algorithms follow a similiar pattern to that of O(n*log n).
+Out of the 3, Heap sort is the slowest as we see from the plot.
+The merge sort is slightly faster than heap sort, but it requires twice the memory of heap sort because of the second array.
+The quick sort is faster than merge sort by a very very small margin, but its efficiency can be majorly impacted by which element is chosen as the pivot.
